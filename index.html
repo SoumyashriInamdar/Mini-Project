@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editkaro.in - Video Editing & Social Media Marketing</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --background-color: #ecf0f1;
+            --text-color: #34495e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        main {
+            padding: 2rem 0;
+        }
+        
+        .category-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .category-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .category-button:hover,
+        .category-button.active {
+            background-color: var(--accent-color);
+        }
+        
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .video-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .video-thumbnail {
+            width: 500px;
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        .video-info {
+            padding: 1rem;
+        }
+        
+        .video-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .video-category {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+        }
+        
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-content {
+            width: 90%;
+            max-width: 800px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .lightbox-video {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .video-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .category-filters {
+                justify-content: center;
+            }
+            
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Editkaro.in</h1>
+            <p>Video Editing & Social Media Marketing Agency</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="category-filters">
+                <button class="category-button active" data-category="all">All</button>
+                <button class="category-button" data-category="short-form">Short-form</button>
+                <button class="category-button" data-category="long-form">Long-form</button>
+                <button class="category-button" data-category="gaming">Gaming</button>
+                <button class="category-button" data-category="football">Football</button>
+                <button class="category-button" data-category="ecommerce">eCommerce</button>
+                <button class="category-button" data-category="documentary">Documentary</button>
+                <button class="category-button" data-category="color-grading">Color Grading</button>
+                <button class="category-button" data-category="anime">Anime</button>
+                <button class="category-button" data-category="ads">Ads</button>
+            </div>
+
+            <div class="video-grid" id="video-grid">
+                <!-- Video cards will be dynamically inserted here -->
+            </div>
+        </div>
+    </main>
+
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <iframe class="lightbox-video" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        const videos = [
+            { title: "Exciting Short Video 1", category: "short-form", url: "https://drive.google.com/file/d/1msKoIXieXecn73Ggov7-K5Ncg-E_ZyVJ/preview",thumbnail:"https://imgv3.fotor.com/images/blog-cover-image/best-youtube-shorts-thumbnail-size_2023-09-28-033838_uvcg.png" },
+            
+ { title: "Exciting Short Video 2", category: "short-form", url: "https://drive.google.com/file/d/1JFzqJtAM67m52dcsSuQJQI4J3GCGNONc/preview",thumbnail:"https://i.ytimg.com/vi/IdEpRs27Iiw/maxresdefault.jpg" },
+           
+ { title: "In-depth Documentary", category: "documentary", url: "https://drive.google.com/file/d/1LMBXgn8gw0LD2LjsPmCR_pQXCacfZAV9/preview" ,thumbnail:"https://s3.amazonaws.com/pbblogassets/uploads/2015/03/header-image-337757-865x505.jpg"},
+           
+{ title: "Documentary", category: "documentary", url: "https://drive.google.com/file/d/1Us9oO28sjfLtelPR5ZZ_GL9KlhESFeD6/preview" ,thumbnail:"https://www.trendingnews.news/wp-content/uploads/2019/05/Self-Improvement.jpg"},
+
+
+
+
+
+
+
+ { title: "Epic Gaming Montage", category: "gaming", url: "https://drive.google.com/file/d/13YxW_9aOEQVwZckVR8LZRPK6xAWsxUYe/preview",thumbnail:"https://bitrebels.com/wp-content/uploads/2020/12/gaming-setup-smooth-gaming-experience-image1.jpg" },
+
+
+            { title: "Football Highlights", category: "football", url: "https://drive.google.com/file/d/1LeB1BTVDXUlNPAztEoX7vUFHLITPE8Wy/preview" ,thumbnail:"https://tse1.mm.bing.net/th?id=OIP.RqsIGTlTFUFCYteOj50OtgHaHa&pid=Api&P=0&h=180"},
+          
+  { title: "Product Showcase", category: "ecommerce", url: "https://drive.google.com/file/d/1KWDEYFB7kpZrsBBNmM1SC_GL9GtjbRX6/preview",thumbnail:"https://www.weverve.com/wp-content/uploads/2020/10/ecommerce-1.jpg" },
+
+ { title: "Product Showcase 2", category: "ecommerce", url: "https://drive.google.com/file/d/1WvF0RNkmXyJDmDYicLShM1EJ_hrAvQ0m/preview",thumbnail:"https://i.pinimg.com/736x/59/86/78/598678be3fcf7db660a801b6e30c15d9.jpg" },
+
+
+            { title: "Long Form Videos 1", category: "long-form", url: "https://drive.google.com/file/d/159CqKZBe0K7TcAe7C9_8YxOqBY2wreRa/preview",thumbnail:"https://blackwoodcreative.com/wp-content/uploads/2019/08/Long-form-videos-01-1024x640.jpg" },
+
+ { title: "Long Form Videos 2", category: "long-form", url: "https://drive.google.com/file/d/1QKFn-iT0_bB9EXXSCMqDQ5kxFCbK3VEg/preview",thumbnail:"http://4.bp.blogspot.com/-Q4kxhoeTHJE/WjxsLOrhYvI/AAAAAAAAACc/AJxI3ZzOz8MP3MEQVbHvRB7VnqwBuwbHgCK4BGAYYCw/s1600/3521_2408659_236622_image.jpg" },
+
+
+
+            { title: "Color Grading Reel", category: "color-grading", url: "https://drive.google.com/file/d/1Z44prGPhxNrI-EAnlAIjYPBaCcKsl-70/preview" ,thumbnail:"https://www.cined.com/content/uploads/2023/03/color_grading_with_AI_color_creative_week-feature_image_v3.jpg"},
+            { title: "Anime Music Video", category: "anime", url: "https://drive.google.com/file/d/1phDRwovujmjm77B6vT0NnVfvX9Fb8EM2/preview" ,thumbnail:"https://tse3.mm.bing.net/th?id=OIP.9KiJpCPQHYGtFp1-q-AJBAHaEK&pid=Api&P=0&h=180"},
+
+{ title: "Anime Video", category: "anime", url: "https://drive.google.com/file/d/1DlDYiUlyCRQyBl-neNiCIV3szQnC-HtO/preview" ,thumbnail:"https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/10-roronoa-zoro-nguyen-hai.jpg"},
+
+
+
+
+            { title: "TV Commercial", category: "ads", url: "https://drive.google.com/file/d/1J56RJ4AZaT7PpqsSmj6JZH1vhSkeH60r/preview",thumbnail:"http://louis-henwood.com/wp-content/uploads/2016/Heroes/Coke-Zero-2013-A2-portrait.jpg?_t=1525364019" },
+        ];
+
+        const videoGrid = document.getElementById('video-grid');
+        const categoryButtons = document.querySelectorAll('.category-button');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxVideo = lightbox.querySelector('iframe');
+
+        
+
+function createVideoCard(video) {
+    const card = document.createElement('div');
+    card.className = 'video-card';
+    card.setAttribute('data-category', video.category);
+    card.innerHTML = `
+        <img src="${video.thumbnail}" alt="${video.title}" class="video-thumbnail">
+        <div class="video-info">
+            <h3 class="video-title">${video.title}</h3>
+            <p class="video-category">${video.category}</p>
+        </div>
+    `;
+    card.addEventListener('click', () => openLightbox(video.url));
+    return card;
+}
+
+        function renderVideos(category = 'all') {
+            videoGrid.innerHTML = '';
+            videos.forEach(video => {
+                if (category === 'all' || video.category === category) {
+                    videoGrid.appendChild(createVideoCard(video));
+                }
+            });
+        }
+
+
+
+
+
+
+        function openLightbox(url) {
+            lightboxVideo.src = url;
+            lightbox.classList.add('active');
+        }
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+                lightboxVideo.src = '';
+            }
+        });
+
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const category = button.getAttribute('data-category');
+                renderVideos(category);
+            });
+        });
+
+        renderVideos();
+    </script>
+</body>
+</html>
