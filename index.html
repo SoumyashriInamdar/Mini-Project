@@ -1,174 +1,190 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editkaro.in - Video Editing & Social Media Marketing</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-        
-        :root {
-            --primary-color: #3498db;
-            --secondary-color: #2c3e50;
-            --accent-color: #e74c3c;
-            --background-color: #ecf0f1;
-            --text-color: #34495e;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        header {
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        main {
-            padding: 2rem 0;
-        }
-        
-        .category-filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        .category-button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        
-        .category-button:hover,
-        .category-button.active {
-            background-color: var(--accent-color);
-        }
-        
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .video-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .video-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-        
-        .video-thumbnail {
-            width: 500px;
-            height: 400px;
-            object-fit: cover;
-        }
-        
-        .video-info {
-            padding: 1rem;
-        }
-        
-        .video-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-        
-        .video-category {
-            font-size: 0.9rem;
-            color: var(--primary-color);
-        }
-        
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        
-        .lightbox.active {
-            display: flex;
-        }
-        
-        .lightbox-content {
-            width: 90%;
-            max-width: 800px;
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .lightbox-video {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .video-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .category-filters {
-                justify-content: center;
-            }
-            
-            .video-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
+    <title>Video Gallery</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+    
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2c3e50;
+      --accent-color: #e74c3c;
+      --background-color: #ecf0f1;
+      --text-color: #34495e;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+    
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    header {
+      background-color: var(--secondary-color);
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    main {
+      padding: 2rem 0;
+    }
+    
+    .category-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .category-button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .category-button:hover,
+    .category-button.active {
+      background-color: var(--accent-color);
+    }
+    
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    /* ✅ Updated card styling */
+    .video-card {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    
+    .video-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* ✅ Fixed thumbnail */
+    .video-thumbnail {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      flex-shrink: 0;
+    }
+    
+    /* ✅ Info area expands so cards align */
+    .video-info {
+      padding: 1rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .video-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    /* ✅ Category sticks to bottom */
+    .video-category {
+      font-size: 0.9rem;
+      color: var(--primary-color);
+      margin-top: auto;
+    }
+    
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    
+    .lightbox.active {
+      display: flex;
+    }
+    
+    .lightbox-content {
+      width: 90%;
+      max-width: 800px;
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .lightbox-video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+    
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .video-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .category-filters {
+        justify-content: center;
+      }
+      
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+    </head>
 <body>
     <header>
         <div class="container">
-            <h1>Editkaro.in</h1>
-            <p>Video Editing & Social Media Marketing Agency</p>
+            <h1>Video Gallery</h1>
+            
         </div>
     </header>
 
@@ -207,13 +223,7 @@
            
  { title: "In-depth Documentary", category: "documentary", url: "https://drive.google.com/file/d/1LMBXgn8gw0LD2LjsPmCR_pQXCacfZAV9/preview" ,thumbnail:"https://s3.amazonaws.com/pbblogassets/uploads/2015/03/header-image-337757-865x505.jpg"},
            
-{ title: "Documentary", category: "documentary", url: "https://drive.google.com/file/d/1Us9oO28sjfLtelPR5ZZ_GL9KlhESFeD6/preview" ,thumbnail:"https://www.trendingnews.news/wp-content/uploads/2019/05/Self-Improvement.jpg"},
-
-
-
-
-
-
+{ title: "Documentary", category: "documentary", url: "https://drive.google.com/file/d/1Us9oO28sjfLtelPR5ZZ_GL9KlhESFeD6/preview" ,thumbnail:"https://tonyfolden.wordpress.com/wp-content/uploads/2015/09/documentary-shot.jpg"},
 
  { title: "Epic Gaming Montage", category: "gaming", url: "https://drive.google.com/file/d/13YxW_9aOEQVwZckVR8LZRPK6xAWsxUYe/preview",thumbnail:"https://bitrebels.com/wp-content/uploads/2020/12/gaming-setup-smooth-gaming-experience-image1.jpg" },
 
